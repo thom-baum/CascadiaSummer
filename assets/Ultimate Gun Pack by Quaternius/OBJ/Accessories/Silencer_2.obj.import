@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://blrxoqjqdib4a"
+path="res://.godot/imported/Silencer_2.obj-fcf4b0499aecbf1b367679771dfd7a72.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Silencer_2.obj-fcf4b0499aecbf1b367679771dfd7a72.mesh"]
+
+source_file="res://assets/Ultimate Gun Pack by Quaternius/OBJ/Accessories/Silencer_2.obj"
+dest_files=["res://.godot/imported/Silencer_2.obj-fcf4b0499aecbf1b367679771dfd7a72.mesh", "res://.godot/imported/Silencer_2.obj-fcf4b0499aecbf1b367679771dfd7a72.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

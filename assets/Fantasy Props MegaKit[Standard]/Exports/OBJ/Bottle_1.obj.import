@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cvho5yup73cu"
+path="res://.godot/imported/Bottle_1.obj-4a2a9e5a792df625afb8e22b24bce769.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Bottle_1.obj-4a2a9e5a792df625afb8e22b24bce769.mesh"]
+
+source_file="res://assets/Fantasy Props MegaKit[Standard]/Exports/OBJ/Bottle_1.obj"
+dest_files=["res://.godot/imported/Bottle_1.obj-4a2a9e5a792df625afb8e22b24bce769.mesh", "res://.godot/imported/Bottle_1.obj-4a2a9e5a792df625afb8e22b24bce769.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

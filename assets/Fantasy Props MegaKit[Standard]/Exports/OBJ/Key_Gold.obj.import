@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://nl6blfq62iw0"
+path="res://.godot/imported/Key_Gold.obj-37e08a3ad6fb420d9d0595ca77a18c40.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Key_Gold.obj-37e08a3ad6fb420d9d0595ca77a18c40.mesh"]
+
+source_file="res://assets/Fantasy Props MegaKit[Standard]/Exports/OBJ/Key_Gold.obj"
+dest_files=["res://.godot/imported/Key_Gold.obj-37e08a3ad6fb420d9d0595ca77a18c40.mesh", "res://.godot/imported/Key_Gold.obj-37e08a3ad6fb420d9d0595ca77a18c40.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

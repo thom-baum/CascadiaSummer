@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://c5ir5yaai4rnv"]
+
+[ext_resource type="Script" uid="uid://c8jcv61oxt1qm" path="res://scenes/fx_critical.gd" id="1_fx"]
+
+[sub_resource type="ParticleProcessMaterial" id="PPM_crit"]
+emission_shape = 1
+emission_sphere_radius = 0.07
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 0.9
+initial_velocity_max = 2.7
+gravity = Vector3(0, 1.5, 0)
+scale_min = 0.35
+scale_max = 0.95
+
+[sub_resource type="StandardMaterial3D" id="Material_crit_particle"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.4, 1, 0.6, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_crit"]
+material = SubResource("Material_crit_particle")
+radius = 0.025
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="Material_beam"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.35, 1, 0.55, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_beam"]
+material = SubResource("Material_beam")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 1.0
+
+[node name="CriticalFx" type="Node3D" unique_id=1752674358]
+script = ExtResource("1_fx")
+
+[node name="Burst" type="GPUParticles3D" parent="." unique_id=2135461200]
+emitting = false
+amount = 26
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-1.8, -1.8, -1.8, 3.6, 3.6, 3.6)
+process_material = SubResource("PPM_crit")
+draw_pass_1 = SubResource("SphereMesh_crit")
+
+[node name="Beam" type="MeshInstance3D" parent="." unique_id=1183483101]
+mesh = SubResource("CylinderMesh_beam")

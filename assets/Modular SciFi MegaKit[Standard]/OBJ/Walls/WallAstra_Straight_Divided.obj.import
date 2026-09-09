@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cerr8u5bg7a7i"
+path="res://.godot/imported/WallAstra_Straight_Divided.obj-2e1a6b4da19ab4c0fde6604aa9fbc3f5.mesh"
+
+[deps]
+
+files=["res://.godot/imported/WallAstra_Straight_Divided.obj-2e1a6b4da19ab4c0fde6604aa9fbc3f5.mesh"]
+
+source_file="res://assets/Modular SciFi MegaKit[Standard]/OBJ/Walls/WallAstra_Straight_Divided.obj"
+dest_files=["res://.godot/imported/WallAstra_Straight_Divided.obj-2e1a6b4da19ab4c0fde6604aa9fbc3f5.mesh", "res://.godot/imported/WallAstra_Straight_Divided.obj-2e1a6b4da19ab4c0fde6604aa9fbc3f5.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

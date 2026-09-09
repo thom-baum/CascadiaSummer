@@ -1,0 +1,463 @@
+[gd_scene format=3 uid="uid://cwx4a66qqd105"]
+
+[ext_resource type="Script" uid="uid://dwduxpfflmoe0" path="res://scripts/player_controller.gd" id="1_controller"]
+[ext_resource type="PackedScene" uid="uid://q5pa3u3gvvp3" path="res://assets/Universal Base Characters[Standard]/Base Characters/Godot - UE/Superhero_Male_FullBody.gltf" id="2_4c57u"]
+[ext_resource type="Script" uid="uid://c6colg5sachyr" path="res://scripts/third_person_camera.gd" id="2_camera"]
+[ext_resource type="Script" uid="uid://f0dws8a1tot5" path="res://scripts/player_animator.gd" id="2_efxa6"]
+[ext_resource type="PackedScene" uid="uid://dc12bnhob7pf0" path="res://assets/models/kenney/survival-kit/tool-hammer.glb" id="3_efxa6"]
+[ext_resource type="Script" uid="uid://cwh86txm3ilb1" path="res://scripts/health.gd" id="3_health"]
+[ext_resource type="Script" uid="uid://bd40gow6kxl45" path="res://scripts/hitbox.gd" id="4_hitbox"]
+[ext_resource type="Script" uid="uid://jvavihb3k1bf" path="res://scripts/hurtbox.gd" id="5_hurtbox"]
+[ext_resource type="Script" uid="uid://yp0fqqbi38wi" path="res://scripts/training_dummy.gd" id="6_dummy"]
+[ext_resource type="PackedScene" path="res://enemy.tscn" id="7_enemy"]
+[ext_resource type="Script" uid="uid://be82gwipyd2ck" path="res://scripts/hud.gd" id="8_hud"]
+[ext_resource type="AudioStream" uid="uid://dxx0qxpftxk3" path="res://assets/models/ce529ff9-2740-4312-a125-3dea60fa2f4c_sfx_steady_gentle_rainfall_ambienc__1788153188514.wav" id="12_dg77c"]
+[ext_resource type="PackedScene" path="res://scenes/fx_hit.tscn" id="13_fx_hit"]
+[ext_resource type="PackedScene" path="res://scenes/lock_indicator.tscn" id="14_lock_scene"]
+[ext_resource type="PackedScene" path="res://scenes/fx_critical.tscn" id="15_critfx"]
+
+[sub_resource type="Environment" id="Environment_world"]
+background_mode = 1
+background_color = Color(0.27, 0.32, 0.36, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.53, 0.62, 0.7, 1)
+ambient_light_energy = 0.68
+tonemap_mode = 3
+fog_enabled = true
+fog_light_color = Color(0.42, 0.5, 0.57, 1)
+fog_density = 0.05
+
+[sub_resource type="StandardMaterial3D" id="Material_ground"]
+albedo_color = Color(0.26, 0.28, 0.31, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ground"]
+material = SubResource("Material_ground")
+size = Vector3(160, 1, 160)
+
+[sub_resource type="BoxShape3D" id="BoxShape_ground"]
+size = Vector3(160, 1, 160)
+
+[sub_resource type="StandardMaterial3D" id="Material_ruin_a"]
+albedo_color = Color(0.42, 0.44, 0.47, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="BoxMesh_ruin_med"]
+size = Vector3(3, 1.8, 1.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape_ruin_med"]
+size = Vector3(3, 1.8, 1.8)
+
+[sub_resource type="StandardMaterial3D" id="Material_ruin_b"]
+albedo_color = Color(0.33, 0.35, 0.38, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ruin_small"]
+size = Vector3(1.6, 1.2, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape_ruin_small"]
+size = Vector3(1.6, 1.2, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ruin_long"]
+size = Vector3(5, 1.4, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape_ruin_long"]
+size = Vector3(5, 1.4, 2)
+
+[sub_resource type="StandardMaterial3D" id="Material_ruin_c"]
+albedo_color = Color(0.38, 0.4, 0.42, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_ruin_flat"]
+size = Vector3(3.6, 0.9, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape_ruin_flat"]
+size = Vector3(3.6, 0.9, 3)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.45
+height = 1.8
+
+[sub_resource type="BoxShape3D" id="BoxShape_attack"]
+size = Vector3(1.5, 1.2, 1.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape_dummy_body"]
+size = Vector3(1, 1.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="Material_dummy"]
+albedo_color = Color(0.62, 0.45, 0.3, 1)
+roughness = 0.85
+
+[sub_resource type="BoxMesh" id="BoxMesh_dummy_body"]
+material = SubResource("Material_dummy")
+size = Vector3(0.8, 1.6, 0.5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_dummy_head"]
+material = SubResource("Material_dummy")
+radius = 0.3
+height = 0.6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_hud_bg"]
+bg_color = Color(0.06, 0.07, 0.08, 0.72)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_hud_health"]
+bg_color = Color(0.58, 0.2, 0.18, 0.96)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_hud_stamina"]
+bg_color = Color(0.34, 0.47, 0.49, 0.96)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="World" type="Node3D" unique_id=370693032]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1395475320]
+environment = SubResource("Environment_world")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1879047956]
+transform = Transform3D(0.8660254, -0.43301272, 0.24999999, 0, 0.49999997, 0.86602545, -0.5, -0.75, 0.43301266, 0, 0, 0)
+light_color = Color(0.58, 0.67, 0.77, 1)
+light_energy = 0.72
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=2113562380]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1820505351]
+mesh = SubResource("BoxMesh_ground")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=357041411]
+shape = SubResource("BoxShape_ground")
+
+[node name="Ruins" type="Node3D" parent="." unique_id=97832022]
+
+[node name="RuinBlock_01" type="StaticBody3D" parent="Ruins" unique_id=775128032]
+transform = Transform3D(0.9396926, 0, 0.34202012, 0, 1, 0, -0.34202012, 0, 0.9396926, 6, 0.9, 3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ruins/RuinBlock_01" unique_id=1285592214]
+material_override = SubResource("Material_ruin_a")
+mesh = SubResource("BoxMesh_ruin_med")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ruins/RuinBlock_01" unique_id=1663590141]
+shape = SubResource("BoxShape_ruin_med")
+
+[node name="RuinBlock_02" type="StaticBody3D" parent="Ruins" unique_id=1269245097]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -6.5, 0.6, -2.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ruins/RuinBlock_02" unique_id=1934069429]
+material_override = SubResource("Material_ruin_b")
+mesh = SubResource("BoxMesh_ruin_small")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ruins/RuinBlock_02" unique_id=263646548]
+shape = SubResource("BoxShape_ruin_small")
+
+[node name="RuinBlock_03" type="StaticBody3D" parent="Ruins" unique_id=946896443]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 3.5, 0.7, -7)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ruins/RuinBlock_03" unique_id=952514036]
+material_override = SubResource("Material_ruin_a")
+mesh = SubResource("BoxMesh_ruin_long")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ruins/RuinBlock_03" unique_id=803470939]
+shape = SubResource("BoxShape_ruin_long")
+
+[node name="RuinBlock_04" type="StaticBody3D" parent="Ruins" unique_id=758354263]
+transform = Transform3D(0.9781476, 0, -0.2079117, 0, 1, 0, 0.2079117, 0, 0.9781476, -3.2, 0.45, 6.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ruins/RuinBlock_04" unique_id=2031204539]
+material_override = SubResource("Material_ruin_c")
+mesh = SubResource("BoxMesh_ruin_flat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ruins/RuinBlock_04" unique_id=159967778]
+shape = SubResource("BoxShape_ruin_flat")
+
+[node name="RuinBlock_05" type="StaticBody3D" parent="Ruins" unique_id=990000602]
+transform = Transform3D(0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.25881907, 8.5, 0.9, -4)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ruins/RuinBlock_05" unique_id=944538618]
+material_override = SubResource("Material_ruin_b")
+mesh = SubResource("BoxMesh_ruin_med")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ruins/RuinBlock_05" unique_id=1539577625]
+shape = SubResource("BoxShape_ruin_med")
+
+[node name="RuinBlock_06" type="StaticBody3D" parent="Ruins" unique_id=1139596527]
+transform = Transform3D(0.9848077, 0, 0.17364818, 0, 1, 0, -0.17364818, 0, 0.9848077, -9, 0.6, 3.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ruins/RuinBlock_06" unique_id=817067797]
+material_override = SubResource("Material_ruin_c")
+mesh = SubResource("BoxMesh_ruin_small")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ruins/RuinBlock_06" unique_id=1433190880]
+shape = SubResource("BoxShape_ruin_small")
+
+[node name="RuinBlock_07" type="StaticBody3D" parent="Ruins" unique_id=572558356]
+transform = Transform3D(0.49999997, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.49999997, -1.5, 0.7, -9.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ruins/RuinBlock_07" unique_id=308793917]
+material_override = SubResource("Material_ruin_b")
+mesh = SubResource("BoxMesh_ruin_long")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ruins/RuinBlock_07" unique_id=1728176580]
+shape = SubResource("BoxShape_ruin_long")
+
+[node name="RuinBlock_08" type="StaticBody3D" parent="Ruins" unique_id=1724127993]
+transform = Transform3D(0.83867055, 0, 0.54463905, 0, 1, 0, -0.54463905, 0, 0.83867055, 9.5, 0.45, 6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ruins/RuinBlock_08" unique_id=1630818635]
+material_override = SubResource("Material_ruin_a")
+mesh = SubResource("BoxMesh_ruin_flat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ruins/RuinBlock_08" unique_id=2014994252]
+shape = SubResource("BoxShape_ruin_flat")
+
+[node name="RuinBlock_09" type="StaticBody3D" parent="Ruins" unique_id=1008223968]
+transform = Transform3D(-0.90630776, 0, 0.42261833, 0, 1, 0, -0.42261833, 0, -0.90630776, -5, 0.9, 9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ruins/RuinBlock_09" unique_id=199237294]
+material_override = SubResource("Material_ruin_c")
+mesh = SubResource("BoxMesh_ruin_med")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ruins/RuinBlock_09" unique_id=1999085285]
+shape = SubResource("BoxShape_ruin_med")
+
+[node name="RuinBlock_10" type="StaticBody3D" parent="Ruins" unique_id=1717505757]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.5, 0.6, 11)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ruins/RuinBlock_10" unique_id=1869989732]
+material_override = SubResource("Material_ruin_a")
+mesh = SubResource("BoxMesh_ruin_small")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ruins/RuinBlock_10" unique_id=1510482093]
+shape = SubResource("BoxShape_ruin_small")
+
+[node name="RuinBlock_11" type="StaticBody3D" parent="Ruins" unique_id=705354136]
+transform = Transform3D(0.99026805, 0, -0.1391731, 0, 1, 0, 0.1391731, 0, 0.99026805, -11, 0.9, -6.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ruins/RuinBlock_11" unique_id=254455830]
+material_override = SubResource("Material_ruin_b")
+mesh = SubResource("BoxMesh_ruin_med")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ruins/RuinBlock_11" unique_id=445879226]
+shape = SubResource("BoxShape_ruin_med")
+
+[node name="RuinBlock_12" type="StaticBody3D" parent="Ruins" unique_id=32657602]
+transform = Transform3D(-0.34202012, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, -0.34202012, 7, 0.7, 10.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ruins/RuinBlock_12" unique_id=890726984]
+material_override = SubResource("Material_ruin_c")
+mesh = SubResource("BoxMesh_ruin_long")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ruins/RuinBlock_12" unique_id=1866759173]
+shape = SubResource("BoxShape_ruin_long")
+
+[node name="RuinBlock_13" type="StaticBody3D" parent="Ruins" unique_id=1005027279]
+transform = Transform3D(0.8876919, -0.22461578, 0.40193388, 0.09941248, 0.94584656, 0.309017, -0.44957784, -0.23435463, 0.8619499, -3.5, 1.2, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ruins/RuinBlock_13" unique_id=1379894308]
+material_override = SubResource("Material_ruin_a")
+mesh = SubResource("BoxMesh_ruin_med")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ruins/RuinBlock_13" unique_id=1431229764]
+shape = SubResource("BoxShape_ruin_med")
+
+[node name="RuinBlock_14" type="StaticBody3D" parent="Ruins" unique_id=1323610917]
+transform = Transform3D(0.74328965, 0.18532293, -0.6427876, -0.2419219, 0.9702957, 0, 0.62369406, 0.15550439, 0.76604444, 2, 0.8, 5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ruins/RuinBlock_14" unique_id=1243390348]
+material_override = SubResource("Material_ruin_b")
+mesh = SubResource("BoxMesh_ruin_flat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ruins/RuinBlock_14" unique_id=86459005]
+shape = SubResource("BoxShape_ruin_flat")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=702011024 groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8)
+collision_layer = 2
+script = ExtResource("1_controller")
+critical_fx_scene = ExtResource("15_critfx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=487302666]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="SkinPivot" type="Node3D" parent="Player" unique_id=434610561]
+
+[node name="PlayerVisualRoot" type="Node3D" parent="Player/SkinPivot" unique_id=1461269131]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, 0.1, 0)
+script = ExtResource("2_efxa6")
+
+[node name="CharacterVisual" parent="Player/SkinPivot/PlayerVisualRoot" unique_id=1445114333 instance=ExtResource("2_4c57u")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="HeldWeapon" parent="Player/SkinPivot/PlayerVisualRoot" unique_id=29445612 instance=ExtResource("3_efxa6")]
+transform = Transform3D(1, 0, 0, 0, 0.9887711, -0.14943814, 0, 0.14943814, 0.9887711, 0.3, 0.8, 0.05)
+
+[node name="CameraYaw" type="Node3D" parent="Player" unique_id=380259929]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+script = ExtResource("2_camera")
+
+[node name="CameraPitch" type="Node3D" parent="Player/CameraYaw" unique_id=773388071]
+transform = Transform3D(1, 0, 0, 0, 0.9510566, 0.30901673, 0, -0.30901673, 0.9510566, 0, 0, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Player/CameraYaw/CameraPitch" unique_id=465846671]
+spring_length = 5.0
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraYaw/CameraPitch/SpringArm3D" unique_id=1391007172]
+current = true
+fov = 68.0
+
+[node name="Health" type="Node" parent="Player" unique_id=865692513]
+script = ExtResource("3_health")
+
+[node name="Hurtbox" type="Area3D" parent="Player" unique_id=1651465082]
+collision_layer = 4
+collision_mask = 32
+script = ExtResource("5_hurtbox")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Hurtbox" unique_id=1072977622]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="AttackArea" type="Area3D" parent="Player" unique_id=2126818404]
+collision_layer = 8
+collision_mask = 16
+script = ExtResource("4_hitbox")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/AttackArea" unique_id=1727377655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.95)
+shape = SubResource("BoxShape_attack")
+disabled = true
+
+[node name="TrainingDummy" type="CharacterBody3D" parent="." unique_id=793900641 groups=["lockable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+script = ExtResource("6_dummy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrainingDummy" unique_id=870813044]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+shape = SubResource("BoxShape_dummy_body")
+
+[node name="VisualRoot" type="Node3D" parent="TrainingDummy" unique_id=1009157776]
+
+[node name="Body" type="MeshInstance3D" parent="TrainingDummy/VisualRoot" unique_id=730481426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+mesh = SubResource("BoxMesh_dummy_body")
+
+[node name="Head" type="MeshInstance3D" parent="TrainingDummy/VisualRoot" unique_id=1643749564]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+mesh = SubResource("SphereMesh_dummy_head")
+
+[node name="Hurtbox" type="Area3D" parent="TrainingDummy" unique_id=351658524]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("5_hurtbox")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrainingDummy/Hurtbox" unique_id=1755049813]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+shape = SubResource("BoxShape_dummy_body")
+
+[node name="Health" type="Node" parent="TrainingDummy" unique_id=1987811693]
+script = ExtResource("3_health")
+max_health = 150
+
+[node name="HitFx" parent="TrainingDummy" unique_id=1926853660 instance=ExtResource("13_fx_hit")]
+
+[node name="Enemy" parent="." unique_id=1799394127 instance=ExtResource("7_enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, -4.5)
+
+[node name="SpawnPoint" type="Node3D" parent="." unique_id=1197097471]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8)
+
+[node name="LockIndicator" parent="." unique_id=2031099343 instance=ExtResource("14_lock_scene")]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1160504772]
+layer = 10
+script = ExtResource("8_hud")
+
+[node name="Bars" type="VBoxContainer" parent="HUD" unique_id=676470570]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -96.0
+offset_right = 324.0
+offset_bottom = -24.0
+grow_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="HealthBar" type="ProgressBar" parent="HUD/Bars" unique_id=1883857169]
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBox_hud_bg")
+theme_override_styles/fill = SubResource("StyleBox_hud_health")
+show_percentage = false
+
+[node name="StaminaBar" type="ProgressBar" parent="HUD/Bars" unique_id=1470367402]
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBox_hud_bg")
+theme_override_styles/fill = SubResource("StyleBox_hud_stamina")
+show_percentage = false
+
+[node name="FadeRect" type="ColorRect" parent="HUD" unique_id=1009940590]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.01, 0.012, 0.015, 0)
+
+[node name="DeathText" type="Label" parent="HUD" unique_id=311597206]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.55
+anchor_right = 0.5
+anchor_bottom = 0.55
+offset_left = -520.0
+offset_top = -46.0
+offset_right = 520.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.66, 0.72, 0.78, 1)
+theme_override_font_sizes/font_size = 24
+text = "the signal takes you"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CriticalPrompt" type="Label" parent="HUD" unique_id=1699351027]
+visible = false
+modulate = Color(0.45, 1, 0.62, 1)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = 96.0
+offset_right = 240.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.35, 1, 0.55, 1)
+theme_override_colors/font_outline_color = Color(0.01, 0.06, 0.03, 0.85)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "LMB - CRITICAL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WorldAmbience" type="AudioStreamPlayer" parent="." unique_id=1613382544]
+stream = ExtResource("12_dg77c")
+volume_db = -18.0
+autoplay = true
+
+[connection signal="finished" from="WorldAmbience" to="WorldAmbience" method="play"]

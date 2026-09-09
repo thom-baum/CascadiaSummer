@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://closv1y76scuf"
+path="res://.godot/imported/Bed_Twin2.obj-797c8b9c2a08c9db70977ee3d829e97a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Bed_Twin2.obj-797c8b9c2a08c9db70977ee3d829e97a.mesh"]
+
+source_file="res://assets/Fantasy Props MegaKit[Standard]/Exports/OBJ/Bed_Twin2.obj"
+dest_files=["res://.godot/imported/Bed_Twin2.obj-797c8b9c2a08c9db70977ee3d829e97a.mesh", "res://.godot/imported/Bed_Twin2.obj-797c8b9c2a08c9db70977ee3d829e97a.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

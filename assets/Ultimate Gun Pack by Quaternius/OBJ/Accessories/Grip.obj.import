@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c3ik06x5htkmo"
+path="res://.godot/imported/Grip.obj-1e6847f7f38bf2f69b46d86b9a325e03.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Grip.obj-1e6847f7f38bf2f69b46d86b9a325e03.mesh"]
+
+source_file="res://assets/Ultimate Gun Pack by Quaternius/OBJ/Accessories/Grip.obj"
+dest_files=["res://.godot/imported/Grip.obj-1e6847f7f38bf2f69b46d86b9a325e03.mesh", "res://.godot/imported/Grip.obj-1e6847f7f38bf2f69b46d86b9a325e03.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

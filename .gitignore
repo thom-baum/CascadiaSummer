@@ -1,0 +1,8 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Summer Engine local-only state
+.summer/local/
+
+project.godot.bak

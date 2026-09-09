@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bsdfkqus555c0"
+path="res://.godot/imported/Door_Frame_SquareTall.obj-4ead2b95774f6852cce7411b3bc2d1ae.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Door_Frame_SquareTall.obj-4ead2b95774f6852cce7411b3bc2d1ae.mesh"]
+
+source_file="res://assets/Modular SciFi MegaKit[Standard]/OBJ/Platforms/Door_Frame_SquareTall.obj"
+dest_files=["res://.godot/imported/Door_Frame_SquareTall.obj-4ead2b95774f6852cce7411b3bc2d1ae.mesh", "res://.godot/imported/Door_Frame_SquareTall.obj-4ead2b95774f6852cce7411b3bc2d1ae.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

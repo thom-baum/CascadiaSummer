@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3]
+
+[sub_resource type="Gradient" id="Gradient_riposte"]
+offsets = PackedFloat32Array(0, 0.45, 1)
+colors = PackedColorArray(0.95, 0.97, 1, 1, 0.72, 0.83, 0.95, 0.7, 0.42, 0.55, 0.7, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="PPM_riposte"]
+emission_shape = 0
+direction = Vector3(0, 1, 0)
+spread = 180.0
+gravity = Vector3(0, -2.6, 0)
+initial_velocity_min = 1.6
+initial_velocity_max = 4.0
+scale_min = 0.7
+scale_max = 1.7
+color_ramp = SubResource("Gradient_riposte")
+
+[sub_resource type="SphereMesh" id="SphereMesh_riposte"]
+radius = 0.032
+height = 0.064
+
+[node name="RiposteFx" type="GPUParticles3D"]
+emitting = false
+amount = 30
+lifetime = 0.55
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.2
+local_coords = false
+visibility_aabb = AABB(-2, -2, -2, 4, 4, 4)
+process_material = SubResource("PPM_riposte")
+draw_pass_1 = SubResource("SphereMesh_riposte")

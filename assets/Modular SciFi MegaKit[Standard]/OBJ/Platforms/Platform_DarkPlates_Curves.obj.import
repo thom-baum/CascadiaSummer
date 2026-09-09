@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://qmxo0lckwohd"
+path="res://.godot/imported/Platform_DarkPlates_Curves.obj-181979666691fe75e12d0cf2d599cad3.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Platform_DarkPlates_Curves.obj-181979666691fe75e12d0cf2d599cad3.mesh"]
+
+source_file="res://assets/Modular SciFi MegaKit[Standard]/OBJ/Platforms/Platform_DarkPlates_Curves.obj"
+dest_files=["res://.godot/imported/Platform_DarkPlates_Curves.obj-181979666691fe75e12d0cf2d599cad3.mesh", "res://.godot/imported/Platform_DarkPlates_Curves.obj-181979666691fe75e12d0cf2d599cad3.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
